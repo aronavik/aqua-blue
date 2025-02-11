@@ -11,7 +11,9 @@ license = "MIT"
 requires-python = ">=3.9"
 authors = [
     { name = "Jacob Jeffries", email = "jacob.jeffries@chicagoclubteam.org" },
-    { name = "Ameen Mahmood", email = "ameen.mahmood@chicagoclubteam.org" }
+    { name = "Ameen Mahmood", email = "ameen.mahmood@chicagoclubteam.org" },
+    { name = "Avik Thumati", email = "avik.thumati@chicagoclubteam.org" },
+    { name = "Samuel Josephs", email = "samuel.joseph@chicagoclubteam.org" }
 ]
 keywords = [
     "computing",
@@ -41,7 +43,9 @@ dev = [
     "hatchling~=1.27.0",
     "pytest~=8.0.2",
     "ruff~=0.9.4",
-    "mypy~=1.13.0"
+    "mypy~=1.13.0",
+    "sphinx~=7.4.7",
+    "sphinx_rtd_theme~=3.0.2"
 ]
 
 [tool.hatch.version]

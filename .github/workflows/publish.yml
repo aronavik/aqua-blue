@@ -89,9 +89,54 @@ jobs:
           name: python-package-distributions
           path: dist/
 
+  create-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: False
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Install dependencies
+        run: >-
+          pip install .[dev]
+      - name: Build Sphinx documentation
+        run: >-
+          cd docs; sphinx-build -b html . _build/html
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: sphinx-docs
+          path: docs/_build/html
+
+  deploy-docs:
+    needs:
+      - create-docs
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Download docs artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: sphinx-docs
+          path: html/
+
+      # deploy here
+      - name: Deploy documentation
+        run: >-
+          :
+
   pypi-publish:
     needs:
       - build
+      - create-docs
     name: upload release to PyPI
     runs-on: ubuntu-latest
 
