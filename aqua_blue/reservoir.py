@@ -1,5 +1,6 @@
 """
-This module provides the main EchoStateNetwork instance, which can be trained to forecast time series
+This module provides the main EchoStateNetwork class for time series forecasting
+using reservoir computing.
 """
 
 
@@ -99,7 +100,7 @@ class EchoStateNetwork:
         else:
             x = independent_variables.T @ independent_variables + regularization
 
-            # conditional number 
+            # conditional number
             cond_num = np.linalg.cond(x)
             if cond_num > max_condition_number:
                 warnings.warn(
@@ -110,7 +111,7 @@ class EchoStateNetwork:
                 )
 
             w_out_transpose = np.linalg.solve(x, independent_variables.T @ dependent_variables)
-            
+
         self.w_out = w_out_transpose.T
         self.feedback_loop_guess = time_series_array[-1]
 
